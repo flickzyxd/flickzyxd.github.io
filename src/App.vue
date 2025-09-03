@@ -1,15 +1,29 @@
 <template>
   <div class="header-line"></div>
   <div class="content-wrapper">
-    <div class="aisxght-text">aisxght</div>
+    <div class="aisxght-text animate-element">aisxght</div>
     <div class="social-links">
-      <a href="https://github.com/flickzyxd" target="_blank" class="github-link">GitHub</a>
-      <a href="https://t.me/AIsxght" target="_blank" class="telegram-link">Telegram</a>
+      <a href="https://github.com/flickzyxd" target="_blank" class="github-link animate-element">GitHub</a>
+      <a href="https://t.me/AIsxght" target="_blank" class="telegram-link animate-element">Telegram</a>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  const animateElements = document.querySelectorAll('.animate-element')
+
+  animateElements.forEach((element, index) => {
+    const el = element as HTMLElement
+    // Устанавливаем задержку для каждого элемента
+    setTimeout(() => {
+      el.style.opacity = '1'
+      el.style.transform = 'translateY(0)'
+    }, 300 + index * 200) // Задержка: 300ms + 200ms за каждый следующий элемент
+  })
+})
 </script>
 
 <style lang="scss" scoped>
@@ -25,13 +39,21 @@ body {
   left: 0;
   right: 0;
   height: 4px;
-  background: #4682B4; /* Ярко-голубой цвет */
+  background: #4682B4;
   z-index: 100;
+  opacity: 0;
+  animation: slideInLeft 0.6s ease-out 0.2s forwards;
 }
 
 .content-wrapper {
   margin-top: 30px;
   padding: 20px;
+}
+
+.animate-element {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .aisxght-text {
@@ -83,5 +105,31 @@ body {
   transform: scale(1.05);
   text-shadow: 0 0 10px rgba(0, 136, 204, 0.3);
   background-color: rgba(0, 136, 204, 0.1);
+}
+
+/* Анимации */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Плавное появление всей страницы */
+body {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 </style>
