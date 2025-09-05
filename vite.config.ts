@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
 export default defineConfig({
+  base: './deploying-vite-project/',
   plugins: [
     vue(),
     {
@@ -38,5 +39,4 @@ export default defineConfig({
     host: true
   },
 
-  base: './'
 })
