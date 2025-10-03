@@ -7,6 +7,10 @@
       <a href="https://t.me/AIsxght" target="_blank" class="telegram-link animate-element">Telegram</a>
     </div>
   </div>
+
+  <div>
+    <input class="inputMain">
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -24,6 +28,21 @@ onMounted(() => {
     }, 300 + index * 200) // Задержка: 300ms + 200ms за каждый следующий элемент
   })
 })
+
+
+document.getElementById('mainInput')?.addEventListener('input', function (this: HTMLInputElement) {
+  localStorage.setItem('inputValue', this.value);
+});
+
+window.addEventListener('load', function () {
+  const savedValue = localStorage.getItem('inputValue');
+  if (savedValue) {
+    const inputElement = document.getElementById('mainInput') as HTMLInputElement;
+    if (inputElement) {
+      inputElement.value = savedValue;
+    }
+  }
+});
 </script>
 
 <style lang="scss" scoped>
